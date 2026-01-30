@@ -12,3 +12,6 @@ def isOnline():
         return -1
 
     return 0
+
+def ddededodediamante():
+    print("ddededodediamante mode on")
