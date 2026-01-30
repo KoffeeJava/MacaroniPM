@@ -1,4 +1,7 @@
-# NEW FUNC
+# MacaroniPM | A PenguinMod API wrapper
+Todo: make this readme.
+
+# New functions
 `macaronipm.user.UserExist()`
 
 `macaronipm.user.IsBanned()`
