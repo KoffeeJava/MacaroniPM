@@ -1,12 +1,16 @@
 # MacaroniPM | A PenguinMod API wrapper
-Todo: make this readme.
 
-# New functions
+## Instalation
+
+You can download the latest version of macaronipm via `pip install macaronipm`
+
+## New functions
+
 `macaronipm.user.UserExist()`
 
 `macaronipm.user.IsBanned()`
 
-`macaronipm.user.logout()` 
+`macaronipm.user.logout()`
 
 `macaronipm.user.GetMessages()`
 
