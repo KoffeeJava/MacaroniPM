@@ -1,4 +1,5 @@
 from . import misc
+from. import error
 import io
 import requests
 import json
@@ -12,9 +13,7 @@ def getThumbnail():
     response = requests.get(url)
 
     if not response.status_code == 200:
-        print(f"{Color.RED}Something went wrong!")
-        print(f"Status code: {response.status_code}")
-        print(f"Response from url: {Effect.BOLD}{Effect.UNDERLINE}{json.loads(response.content.decode())["error"]}{Effect.OFF}")
+        error.rerror(response.status_code, response.content)
         return -1
          
     base64_data = base64.b64encode(io.BytesIO(response.content).read()).decode('utf-8')
@@ -79,6 +78,19 @@ def getRankedProjects(page):
 
 def hasLovedVoted():
     url = f"https://projects.penguinmod.com/api/v1/projects/getuserstatewrapper?projectId={misc.PID}&token={misc.TOKEN}"
+
+    response = requests.get(url)
+
+    if not response.status_code == 200:
+        print(f"{Color.RED}Something went wrong!")
+        print(f"Status code: {response.status_code}")
+        print(f"Response from url: {Effect.BOLD}{Effect.UNDERLINE}{json.loads(response.content.decode())["error"]}{Effect.OFF}")
+        return -1
+
+    return json.loads(response.content)
+
+def getFrontpage():
+    url = f"https://projects.penguinmod.com/api/v1/projects/frontpage"
 
     response = requests.get(url)
 
