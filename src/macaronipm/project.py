@@ -4,8 +4,6 @@ import io
 import requests
 import json
 import base64
-from colorist import Color
-from colorist import Effect
 
 def getThumbnail():
     url = f"https://projects.penguinmod.com/api/v1/projects/getproject?projectID={misc.PID}&requestType=thumbnail"
@@ -25,9 +23,7 @@ def getMeta():
     response = requests.get(url)
 
     if not response.status_code == 200:
-        print(f"{Color.RED}Something went wrong!")
-        print(f"Status code: {response.status_code}")
-        print(f"Response from url: {Effect.BOLD}{Effect.UNDERLINE}{json.loads(response.content.decode())["error"]}{Effect.OFF}")
+        error.rerror(response.status_code, response.content)
         return -1
 
     return json.loads(response.content)
@@ -40,9 +36,7 @@ def loveToggle(toggle):
     response = requests.post(url, headers=headers, data=data)
 
     if not response.status_code == 200:
-        print(f"{Color.RED}Something went wrong!")
-        print(f"Status code: {response.status_code}")
-        print(f"Response from url: {Effect.BOLD}{Effect.UNDERLINE}{json.loads(response.content.decode())["error"]}{Effect.OFF}")
+        error.rerror(response.status_code, response.content)
         return -1
     
     return 0
@@ -56,9 +50,7 @@ def voteToggle(toggle):
 
     
     if not response.status_code == 200:
-        print(f"{Color.RED}Something went wrong!")
-        print(f"Status code: {response.status_code}")
-        print(f"Response from url: {Effect.BOLD}{Effect.UNDERLINE}{json.loads(response.content.decode())["error"]}{Effect.OFF}")
+        error.rerror(response.status_code, response.content)
         return -1
     
     return 0
@@ -69,9 +61,7 @@ def getRankedProjects(page):
     response = requests.get(url)
 
     if not response.status_code == 200:
-        print(f"{Color.RED}Something went wrong!")
-        print(f"Status code: {response.status_code}")
-        print(f"Response from url: {Effect.BOLD}{Effect.UNDERLINE}{json.loads(response.content.decode())["error"]}{Effect.OFF}")
+        error.rerror(response.status_code, response.content)
         return -1
 
     return json.loads(response.content)
@@ -82,9 +72,7 @@ def hasLovedVoted():
     response = requests.get(url)
 
     if not response.status_code == 200:
-        print(f"{Color.RED}Something went wrong!")
-        print(f"Status code: {response.status_code}")
-        print(f"Response from url: {Effect.BOLD}{Effect.UNDERLINE}{json.loads(response.content.decode())["error"]}{Effect.OFF}")
+        error.rerror(response.status_code, response.content)
         return -1
 
     return json.loads(response.content)
@@ -95,9 +83,7 @@ def getFrontpage():
     response = requests.get(url)
 
     if not response.status_code == 200:
-        print(f"{Color.RED}Something went wrong!")
-        print(f"Status code: {response.status_code}")
-        print(f"Response from url: {Effect.BOLD}{Effect.UNDERLINE}{json.loads(response.content.decode())["error"]}{Effect.OFF}")
+        error.rerror(response.status_code, response.content)
         return -1
 
     return json.loads(response.content)

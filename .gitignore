@@ -3,4 +3,5 @@ dist/
 __pycache__/
 
 src/macaronipm/__pycache__
-src/macaronipm/__pycache__/project.cpython-314.pyc
+
+src/test.py

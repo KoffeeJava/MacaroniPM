@@ -1,33 +1,28 @@
 from . import misc
+from . import error
 import io
 import requests
 import json
 import base64
-from colorist import Color
-from colorist import Effect
 
 def getMeta(target):   
-    url = f"https://projects.penguinmod.com/api/v1/users/profile?target={target}&token={misc.misc.TOKEN}"
+    url = f"https://projects.penguinmod.com/api/v1/users/profile?target={target}"
 
     response = requests.get(url)
 
     if not response.status_code == 200:
-        print(f"{Color.RED}Something went wrong!")
-        print(f"Status code: {response.status_code}")
-        print(f"Response from url: {Effect.BOLD}{Effect.UNDERLINE}{json.loads(response.content.decode())["error"]}{Effect.OFF}")
+        error.rerror(response.status_code, response.content)
         return -1
 
     return json.loads(response.content)
 
 def isBlocking(target):
-    url = f"https://projects.penguinmod.com/api/v1/users/hasblocked?target={target}&token={misc.misc.TOKEN}"
+    url = f"https://projects.penguinmod.com/api/v1/users/hasblocked?target={target}&token={misc.TOKEN}"
 
     response = requests.get(url)
 
     if not response.status_code == 200:
-        print(f"{Color.RED}Something went wrong!")
-        print(f"Status code: {response.status_code}")
-        print(f"Response from url: {Effect.BOLD}{Effect.UNDERLINE}{json.loads(response.content.decode())["error"]}{Effect.OFF}")
+        error.rerror(response.status_code, response.content)
         return -1
 
     jsons = json.loads(response.content.decode())
@@ -39,9 +34,7 @@ def getPfp(target):
     response = requests.get(url)
 
     if not response.status_code == 200:
-        print(f"{Color.RED}Something went wrong!")
-        print(f"Status code: {response.status_code}")
-        print(f"Response from url: {Effect.BOLD}{Effect.UNDERLINE}{json.loads(response.content.decode())["error"]}{Effect.OFF}")
+        error.rerror(response.status_code, response.content)
         return -1
     
     base64_data = base64.b64encode(io.BytesIO(response.content).read()).decode('utf-8')
@@ -53,9 +46,7 @@ def userExist(target):
     response = requests.get(url)
 
     if not response.status_code == 200:
-        print(f"{Color.RED}Something went wrong!")
-        print(f"Status code: {response.status_code}")
-        print(f"Response from url: {Effect.BOLD}{Effect.UNDERLINE}{json.loads(response.content.decode())["error"]}{Effect.OFF}")
+        error.rerror(response.status_code, response.content)
         return -1
     
 
@@ -67,9 +58,7 @@ def isBanned(target):
     response = requests.get(url)
 
     if not response.status_code == 200:
-        print(f"{Color.RED}Something went wrong!")
-        print(f"Status code: {response.status_code}")
-        print(f"Response from url: {Effect.BOLD}{Effect.UNDERLINE}{json.loads(response.content.decode())["error"]}{Effect.OFF}")
+        error.rerror(response.status_code, response.content)
         return -1
     
 
@@ -78,15 +67,13 @@ def isBanned(target):
 def logout():
     url = "https://projects.penguinmod.com/api/v1/users/logout"
 
-    data = f'{{"token":"{misc.misc.TOKEN}"}}'
+    data = f'{{"token":"{misc.TOKEN}"}}'
     headers = {'Content-type': 'application/json'}
     response = requests.post(url, headers=headers, data=data)
 
     
     if not response.status_code == 200:
-        print(f"{Color.RED}Something went wrong!")
-        print(f"Status code: {response.status_code}")
-        print(f"Response from url: {Effect.BOLD}{Effect.UNDERLINE}{json.loads(response.content.decode())["error"]}{Effect.OFF}")
+        error.rerror(response.status_code, response.content)
         return -1
     
     return 0
@@ -97,9 +84,7 @@ def getMessages():
     response = requests.get(url)
 
     if not response.status_code == 200:
-        print(f"{Color.RED}Something went wrong!")
-        print(f"Status code: {response.status_code}")
-        print(f"Response from url: {Effect.BOLD}{Effect.UNDERLINE}{json.loads(response.content.decode())["error"]}{Effect.OFF}")
+        error.rerror(response.status_code, response.content)
         return -1
 
     jsons = json.loads(response.content.decode())
@@ -111,9 +96,7 @@ def getUnreadMessages():
     response = requests.get(url)
 
     if not response.status_code == 200:
-        print(f"{Color.RED}Something went wrong!")
-        print(f"Status code: {response.status_code}")
-        print(f"Response from url: {Effect.BOLD}{Effect.UNDERLINE}{json.loads(response.content.decode())["error"]}{Effect.OFF}")
+        error.rerror(response.status_code, response.content)
         return -1
 
     jsons = json.loads(response.content.decode())

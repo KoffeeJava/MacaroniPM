@@ -1,6 +1,6 @@
+from. import error
 import requests
 import json
-from colorist import Color
 from colorist import Effect
 from colorist import ColorHex
 
@@ -23,9 +23,7 @@ def follow(target, toggle):
 
     
     if not response.status_code == 200:
-        print(f"MacaroniPM: {Color.RED}Something went wrong!")
-        print(f"Status code: {response.status_code}")
-        print(f"Response from url: {Effect.BOLD}{Effect.UNDERLINE}{json.loads(response.content.decode())["error"]}{Effect.OFF}")
+        error.rerror(response.status_code, response.content)
         return -1
     
     return 0
@@ -37,9 +35,7 @@ def getFeatured():
     response = requests.get(url)
     
     if not response.status_code == 200:
-        print(f"{Color.RED}Something went wrong!")
-        print(f"Status code: {response.status_code}")
-        print(f"Response from url: {Effect.BOLD}{Effect.UNDERLINE}{json.loads(response.content.decode())["error"]}{Effect.OFF}")
+        error.rerror(response.status_code, response.content)
         return -1
         
     return response.text.split()
@@ -50,9 +46,7 @@ def getStats():
     response = requests.get(url)
     
     if not response.status_code == 200:
-        print(f"{Color.RED}Something went wrong!")
-        print(f"Status code: {response.status_code}")
-        print(f"Response from url: {Effect.BOLD}{Effect.UNDERLINE}{json.loads(response.content.decode())["error"]}{Effect.OFF}")
+        error.rerror(response.status_code, response.content)
         return -1
         
     return json.loads(response.content)
